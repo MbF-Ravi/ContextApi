@@ -19,8 +19,21 @@ class MainComponent extends Component {
     }
     this.state = {
       labelName: helpers.labelName,
-      handleSubmit: this.handleSubmit
+      handleSubmit: this.handleSubmit,
+      data1:[],
     };
+  }
+  componentDidMount() {
+   fetch('https://www.reddit.com/r/reactjs.json')
+    .then((result) => {
+      // Get the result
+      // If we want text, call result.text()
+      return result.json();
+    }).then((jsonResult) => {
+      this.setState({
+        data1: jsonResult
+      })
+    })
   }
   render() {
     return (
