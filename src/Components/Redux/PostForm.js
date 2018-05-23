@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import TextField from '../UIComponents/textField';
 class PostForm extends Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			title:"",
+			message:""
+		}
+	}
 	handleSubmit = (e) => {
     e.preventDefault();
-    const title = this.getTitle.value;
-    const message =  this.getMessage.value;
+    const {title, message} = this.state;
     const data = {
       id: new Date(),
       title,
@@ -14,21 +21,24 @@ class PostForm extends Component {
       type:'ADD_POST',
       data
     });
-    this.getTitle.value = '';
-    this.getMessage.value = '';
+    this.setState({
+		title:"",
+		message:""
+	})
   }
+    handleChange(e){
+    	this.setState({
+    		[e.target.name]:e.target.value
+    	})
+    }
 	render() {
 		return (
 			<div>
 			  <h1>Create Post</h1>
-			  <form onSubmit={this.handleSubmit}>
-			   <input required type="text" ref={(input)=>this.getTitle = input} 
-			    placeholder="Enter Post Title"/>
-			   <br /><br />
-			   <textarea required rows="5" ref={(input)=>this.getMessage = input} cols="28" 
-			    placeholder="Enter Post" />
-			   <br /><br />
-			   <button>Post</button>
+			  <form onSubmit={this.handleSubmit} className="box">			   
+			   <TextField name={"title"} value={this.state.title} placeholder={"Enter your name"} onChange={this.handleChange.bind(this)}/>
+			   <TextField name={"message"} value={this.state.message} placeholder={"Enter your message"} onChange={this.handleChange.bind(this)}/>
+			   <button id="buttonlogintoregister" type="submit">submit</button>
 			  </form>
 			</div>
 		);
