@@ -7,10 +7,16 @@ import postReducer from './reducers/postReducer';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-const store = createStore(postReducer);
+import store from './store';
+
+const router = (
+  <Provider store={store}>
+    <ReaduxFile />
+  </Provider>
+)
 
 ReactDOM.render(
-	<Provider store={store}>
-		<ReaduxFile />
-	</Provider>, document.getElementById('root'));
+  router,
+  document.getElementById('root')
+);
 registerServiceWorker();
