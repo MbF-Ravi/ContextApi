@@ -6,16 +6,19 @@ class PostForm extends Component {
 		super(props);
 		this.state = {
 			title:"",
-			message:""
+			message:"",
+			amount: "",
 		}
 	}
 	handleSubmit = (e) => {
     e.preventDefault();
-    const {title, message} = this.state;
+    let {title, message, amount} = this.state;
+    amount = parseInt(amount);
     const data = {
       id: new Date(),
       title,
-      message
+      message,
+      amount
     }
      this.props.dispatch({
       type:'ADD_POST',
@@ -23,7 +26,8 @@ class PostForm extends Component {
     });
     this.setState({
 		title:"",
-		message:""
+		message:"",
+		amount:""
 	})
   }
     handleChange(e){
@@ -36,8 +40,9 @@ class PostForm extends Component {
 			<div>
 			  <h1>Create Post</h1>
 			  <form onSubmit={this.handleSubmit} className="box">			   
-			   <TextField name={"title"} value={this.state.title} placeholder={"Enter your name"} onChange={this.handleChange.bind(this)}/>
-			   <TextField name={"message"} value={this.state.message} placeholder={"Enter your message"} onChange={this.handleChange.bind(this)}/>
+			   <TextField name={"title"} value={this.state.title} placeholder={"Enter your name"} onChange={this.handleChange.bind(this)} type={"text"}/>
+			   <TextField name={"message"} value={this.state.message} placeholder={"Enter your message"} onChange={this.handleChange.bind(this)} type={"text"}/>
+			   <TextField name={"amount"} value={this.state.amount} placeholder={"Enter your amount"} onChange={this.handleChange.bind(this)} type={"number"}/>
 			   <button id="buttonlogintoregister" type="submit">submit</button>
 			  </form>
 			</div>

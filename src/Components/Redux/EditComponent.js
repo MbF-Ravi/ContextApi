@@ -6,20 +6,25 @@ class EditComponent extends Component {
     e.preventDefault();
     const newTitle = this.getTitle.value;
     const newMessage = this.getMessage.value;
+    const newAmount = parseInt(this.getAmount.value);
     const data = {
       newTitle,
-      newMessage
+      newMessage,
+      newAmount
     }
     this.props.dispatch({ type: 'UPDATE', id: this.props.post.id, data: data })
   }
+
   render() {
     return (
       <div>
         <form onSubmit={this.handleEdit}>
           <input required type="text" ref={(input) => this.getTitle = input}
           defaultValue={this.props.post.title} placeholder="Enter Post Title" /><br /><br />
-          <textarea required rows="5" ref={(input) => this.getMessage = input}
+          <input required rows="5" ref={(input) => this.getMessage = input}
           defaultValue={this.props.post.message} cols="28" placeholder="Enter Post" /><br /><br />
+          <input required rows="5" ref={(input) => this.getAmount = input}
+          defaultValue={this.props.post.amount} cols="28" placeholder="Enter Post" /><br /><br />
           <button>Update</button>
         </form>
       </div>

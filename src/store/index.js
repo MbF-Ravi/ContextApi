@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-
+import 'bootstrap/dist/css/bootstrap.css';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga'
 import mySaga from '../sagas'
